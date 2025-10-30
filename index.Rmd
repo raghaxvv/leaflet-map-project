@@ -1,0 +1,150 @@
+---
+title: "Exploring the World with Leaflet"
+author: "Raghav Kapoor"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: flatly
+    highlight: tango
+---
+
+
+```{r setup, include=FALSE}
+# ---- SETUP ----
+if (!requireNamespace("leaflet", quietly = TRUE)) {
+  install.packages("leaflet")
+}
+library(leaflet)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* ---- Clean Poppins Styling ---- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #fffef8, #eefaf6);
+  color: #1e272e;
+  line-height: 1.7;
+  padding: 25px;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #00796b;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.3em;
+  letter-spacing: 0.5px;
+  margin-top: 25px;
+  text-shadow: 1px 1px #dff9fb;
+}
+
+h2 {
+  margin-top: 40px;
+  color: #00897b;
+  border-bottom: 3px solid #fbc02d;
+  padding-bottom: 6px;
+}
+
+p {
+  font-size: 1.05em;
+  text-align: justify;
+  margin: 12px 0;
+}
+
+.leaflet-container {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  margin-top: 25px;
+}
+
+hr {
+  border-top: 2px dashed #fbc02d;
+  margin: 40px 0;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.95em;
+  color: #00796b;
+  font-weight: 500;
+}
+</style>
+
+# Interactive Leaflet Map
+
+This webpage demonstrates how to use the **Leaflet** package in **R Markdown** to create an interactive world map.  
+It includes two map layers — **Default** and **Satellite** — so users can switch between them while exploring.  
+You can zoom, drag, and click the markers to learn more about major world cities.
+
+```{r leaflet-map, echo=FALSE}
+# ---- INTERACTIVE MAP (Default + Satellite) ----
+leaflet() %>%
+  addTiles(group = "Default") %>%
+  addProviderTiles(providers$Esri.WorldImagery, group = "Satellite") %>%
+
+  # North America
+  addMarkers(lng = -74.0060, lat = 40.7128, popup = "<b>New York City, USA</b><br>The city that never sleeps.", group = "Cities") %>%
+  addMarkers(lng = -118.2437, lat = 34.0522, popup = "<b>Los Angeles, USA</b><br>City of Angels with sunny skies.", group = "Cities") %>%
+  addMarkers(lng = -123.1207, lat = 49.2827, popup = "<b>Vancouver, Canada</b><br>Where mountains meet the ocean.", group = "Cities") %>%
+  addMarkers(lng = -99.1332, lat = 19.4326, popup = "<b>Mexico City, Mexico</b><br>Vibrant capital rich with history.", group = "Cities") %>%
+
+  # South America
+  addMarkers(lng = -43.1729, lat = -22.9068, popup = "<b>Rio de Janeiro, Brazil</b><br>Famous for Carnival and beaches.", group = "Cities") %>%
+  addMarkers(lng = -58.3816, lat = -34.6037, popup = "<b>Buenos Aires, Argentina</b><br>Known for tango and architecture.", group = "Cities") %>%
+
+  # Europe
+  addMarkers(lng = -0.1276, lat = 51.5072, popup = "<b>London, UK</b><br>Historic capital of culture and tradition.", group = "Cities") %>%
+  addMarkers(lng = 2.3522, lat = 48.8566, popup = "<b>Paris, France</b><br>City of Lights and art.", group = "Cities") %>%
+  addMarkers(lng = 12.4964, lat = 41.9028, popup = "<b>Rome, Italy</b><br>Home to ancient landmarks and vibrant food culture.", group = "Cities") %>%
+
+  # Africa
+  addMarkers(lng = 31.1342, lat = 29.9792, popup = "<b>Giza, Egypt</b><br>Home of the Great Pyramids.", group = "Cities") %>%
+  addMarkers(lng = 18.4241, lat = -33.9249, popup = "<b>Cape Town, South Africa</b><br>Located at the foot of Table Mountain.", group = "Cities") %>%
+
+  # Asia
+  addMarkers(lng = 139.6917, lat = 35.6895, popup = "<b>Tokyo, Japan</b><br>Where tradition meets modern technology.", group = "Cities") %>%
+  addMarkers(lng = 77.2090, lat = 28.6139, popup = "<b>New Delhi, India</b><br>Capital city rich in history and color.", group = "Cities") %>%
+  addMarkers(lng = 103.8198, lat = 1.3521, popup = "<b>Singapore</b><br>Small island city-state with global influence.", group = "Cities") %>%
+
+  # Oceania
+  addMarkers(lng = 151.2093, lat = -33.8688, popup = "<b>Sydney, Australia</b><br>Known for the Opera House and beaches.", group = "Cities") %>%
+
+  # Controls
+  addLayersControl(
+    baseGroups = c("Default", "Satellite"),
+    overlayGroups = c("Cities"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+  addScaleBar(position = "bottomleft")
+```
+
+# About This Page
+
+This project shows how to embed an **interactive map** into an R Markdown webpage using the **Leaflet** package.  
+It demonstrates adding basic map layers, custom markers, and descriptive popups for multiple cities.
+
+### Page Details
+- **Created on:** `r Sys.Date()`  
+- **Author:** Saanie Naqvi  
+- **Purpose:** To apply R Markdown and Leaflet for geographic visualization.  
+- **Tools Used:** R • R Markdown • Leaflet • HTML Widgets  
+
+# Reflection
+
+This project helped me understand how geographic data can be visualized interactively in R.  
+The Leaflet package made it simple to combine maps, markers, and descriptive text into one web-based display.  
+Keeping the design minimal with only essential map layers ensured that the page loads quickly while still being visually engaging.
+
+<hr>
+
+<footer>
+Created with R Markdown and Leaflet.  
+<br>Interactive world map featuring major cities.
+</footer>
