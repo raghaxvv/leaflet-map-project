@@ -15,7 +15,7 @@
     #map {
       height: 480px;
       width: 80%;
-      margin-top: 20px;
+      margin: 20px auto;
       border: 2px solid #ccc;
       border-radius: 8px;
     }
@@ -27,20 +27,13 @@
 <body>
 
 <h1>Leaflet Map Project</h1>
-<h3 id="date"></h3>
+<h3>October 13, 2025</h3>
 
 <div id="map"></div>
 
 <script>
-  // --- Display today's date dynamically ---
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString('en-US', {
-    year: 'numeric', month: 'long', day: 'numeric'
-  });
-  document.getElementById("date").textContent = formattedDate;
-
   // --- Initialize Leaflet map ---
-  const map = L.map('map').setView([20.5937, 78.9629], 5); // India center
+  const map = L.map('map').setView([20.5937, 78.9629], 5); // Center on India
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
   }).addTo(map);
@@ -53,3 +46,4 @@
 
 </body>
 </html>
+
